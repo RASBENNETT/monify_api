@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 let port = process.env.PORT || 3001
 
-app.get("/houses", (req, res) => {
+app.get("/houses/", (req, res) => {
     res.send("Hello World")
 })
 

@@ -2,22 +2,55 @@ const express = require("express")
 const app = express()
 let port = process.env.PORT || 3001
 
-const properties = require("./json_store/Properties.json")
+const store = require("./json_store/store.json")
 
 
-app.get("/houses", (req, res) => {
+// app.get("/store/*", (req, res) => {
 
-    if (req.query.price) {
-        if (req.query.price == "decreasing") {res.send(properties.sort((a,b) => {return b.price - a.price}))}
-        if (req.query.price == "increasing") {res.send(properties.sort((a,b) => {return a.price - b.price}))}
+//     // if (query.price) {
+//     //     if (query.price == "decreasing") {res.send(properties.sort((a,b) => {return b.price - a.price}))}
+//     //     if (query.price == "increasing") {res.send(properties.sort((a,b) => {return a.price - b.price}))}
         
-        res.send(properties.filter(property => property.price == req.query.price))
+//     //     res.send(properties.filter(property => property.price == query.price))
+//     // }
+//     // else {
+//     //     res.send(properties)
+//     // }
+
+// })
+
+app.get("/store/properties", (req, res) => {
+    priceFilter(res, req.query, store.properties)
+})
+
+app.get("/store/fashion", (req, res) => {
+    priceFilter(res, req.query, store.fashion)
+})
+
+
+
+const priceFilter = (res, query, array) => {
+    if (query && query.price) {
+        
+        if (query.price == "decreasing") {res.send(array.sort((a,b) => {return b.price - a.price}))}
+        if (query.price == "increasing") {res.send(array.sort((a,b) => {return a.price - b.price}))}
+        
+        res.send(array.filter(product => product.price == query.price))
     }
     else {
-        res.send(properties)
+        res.send(array)
     }
+}
 
-})
+
+
+
+
+
+
+
+
+
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);

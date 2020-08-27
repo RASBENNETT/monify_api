@@ -4,21 +4,6 @@ let port = process.env.PORT || 3001
 
 const store = require("./json_store/store.json")
 
-
-// app.get("/store/*", (req, res) => {
-
-//     // if (query.price) {
-//     //     if (query.price == "decreasing") {res.send(properties.sort((a,b) => {return b.price - a.price}))}
-//     //     if (query.price == "increasing") {res.send(properties.sort((a,b) => {return a.price - b.price}))}
-        
-//     //     res.send(properties.filter(property => property.price == query.price))
-//     // }
-//     // else {
-//     //     res.send(properties)
-//     // }
-
-// })
-
 app.get("/store/properties", (req, res) => {
     priceFilter(res, req.query, store.properties)
 })
@@ -26,7 +11,6 @@ app.get("/store/properties", (req, res) => {
 app.get("/store/fashion", (req, res) => {
     priceFilter(res, req.query, store.fashion)
 })
-
 
 
 const priceFilter = (res, query, array) => {
@@ -41,15 +25,6 @@ const priceFilter = (res, query, array) => {
         res.send(array)
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 app.listen(port, () => {

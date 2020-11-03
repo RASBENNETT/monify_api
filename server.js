@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 let port = process.env.PORT || 3001
 
-const store = require("./json_store/store.json")
+const store = require("./store.json")
 
 app.get("/store", (req, res) => {
     res.send(store)
